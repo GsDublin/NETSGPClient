@@ -62,12 +62,29 @@ LC12S::Settings NETSGPClient::readRFModuleSettings()
     *bufferPointer++ = 0x12; // Length
     *bufferPointer++ = 0x00; // NC must be 0
     *bufferPointer++ = 0x18; // Checksum
+    
+
+    Serial.printf("write lc12s: %d\n", 18);
+    for( uint8_t i = 0; i<18; i++) {
+        Serial.printf("%02X,", mBuffer[i]);
+    }
+    Serial.println();
 
     enableProgramming();
 
     mStream.write(&mBuffer[0], 18);
     const size_t read = mStream.readBytes(&mBuffer[0], 18);
-
+    
+    if (read == 18) {
+        Serial.printf("read lc12s: %d\n", read);
+        for( uint8_t i = 0; i<18; i++) {
+            Serial.printf("%02X,", mBuffer[i]);
+        }
+        Serial.println();
+    } else {
+        Serial.println("received !=18");
+    }
+    
     disableProgramming();
 
     LC12S::Settings settings;
@@ -112,11 +129,27 @@ bool NETSGPClient::writeRFModuleSettings(const LC12S::Settings& settings)
     *bufferPointer++ = calcCRC(16); // Checksum, we can calc for 16 bytes since 17th one is 0
 
     enableProgramming();
+    
+    Serial.printf("write lc12s: %d\n", 18);
+    for( uint8_t i = 0; i<18; i++) {
+        Serial.printf("%02X,", mBuffer[i]);
+    }
+    Serial.println();
 
     mStream.write(&mBuffer[0], 18);
     const size_t read = mStream.readBytes(&mBuffer[0], 18);
 
     disableProgramming();
+    
+    if (read == 18) {
+        Serial.printf("read lc12s: %d\n", read);
+        for( uint8_t i = 0; i<18; i++) {
+            Serial.printf("%02X,", mBuffer[i]);
+        }
+        Serial.println();
+    } else {
+        Serial.println("received !=18");
+    }
 
     return read == 18 && mBuffer[0] == 0xAA && mBuffer[1] == 0x5B && mBuffer[17] == calcCRC(17);
 }
@@ -155,6 +188,13 @@ void NETSGPClient::sendCommand(const uint32_t deviceID, const Command command, c
     *bufferPointer++ = 0x00;
     *bufferPointer++ = value;
     *bufferPointer++ = calcCRC(14);
+    
+    
+    Serial.printf("sendCommand: %d\n", 15);
+    for( uint8_t i = 0; i<15; i++) {
+        Serial.printf("%02X,", mBuffer[i]);
+    }
+    Serial.println();
 
     mStream.write(&mBuffer[0], 15);
 }
@@ -252,6 +292,13 @@ void NETSGPClient::disableProgramming()
 
 bool NETSGPClient::fillInverterStatusFromBuffer(const uint8_t* buffer, InverterStatus& status)
 {
+    
+    Serial.printf("fillInverterStatusFromBuffer\n");
+    for( uint8_t i = 0; i<18; i++) {
+        Serial.printf("%02X,", mBuffer[i]);
+    }
+    Serial.println();
+    
     status.deviceID = buffer[6] << 24 | buffer[7] << 16 | buffer[8] << 8 | (buffer[9] & 0xFF);
 
     const uint32_t tempTotal = buffer[10] << 24 | buffer[11] << 16 | buffer[12] << 8 | (buffer[13] & 0xFF);
