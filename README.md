@@ -1,9 +1,9 @@
 # NETSGPClient
 Arduino Interface for cheap 2.4ghz RF enabled Solar Micro Inverters using the so-called NETSGP protocol for communication.
 
-Here is a YouTube video that shows the general function
-https://youtu.be/uA2eMhF7RCY
-[![YoutubeVideo](https://img.youtube.com/vi/uA2eMhF7RCY/0.jpg)](https://www.youtube.com/watch?v=uA2eMhF7RCY)
+# Hardware
+ESP32
+LC12S
 
 ## Examples
 The `PollDemo` shows how to request a status from the Micro Inverter synchronously.
@@ -27,7 +27,7 @@ You can find an overview of all devices and their datasheets [here](http://newen
 | `SG250HS`      | :x:                | :grey_question:    | 250W model  | :grey_question:  |
 | `SG250TS`      | :x:                | :grey_question:    | 250W model  | :grey_question:  |
 | `SG300LS`      | :x:                | :grey_question:    | 300W model  | :grey_question:  |
-| `SG300MS`      | :x:                | :grey_question:    | 300W model  | 19000001         |
+| `SG300MS`      | :white_check_mark: | :white_check_mark: | 300W model  | 19000001         |
 | `SG300HS`      | :x:                | :grey_question:    | 300W model  | :grey_question:  |
 | `SG300TS`      | :x:                | :grey_question:    | 300W model  | :grey_question:  |
 | `SG350LS`      | :x:                | :grey_question:    | 350W model  | :grey_question:  |
@@ -46,7 +46,7 @@ You can find an overview of all devices and their datasheets [here](http://newen
 | `SG500HS`      | :x:                | :grey_question:    | 500W model  | :grey_question:  |
 | `SG500MD`      | :white_check_mark: | :white_check_mark: | 500W model  | 34000001         |
 | `SG500TD`      | :x:                | :grey_question:    | 500W model  | :grey_question:  |
-| `SG600MD`      | :x:                | :grey_question:    | 600W model  | 38000001         |
+| `SG600MD`      | :white_check_mark: | :white_check_mark: | 600W model  | 38000001         |
 | `SG600HD`      | :x:                | :grey_question:    | 600W model  | :grey_question:  |
 | `SG600TD`      | :x:                | :grey_question:    | 600W model  | :grey_question:  |
 | `SG700MD`      | :x:                | :grey_question:    | 700W model  | 41000001         |
