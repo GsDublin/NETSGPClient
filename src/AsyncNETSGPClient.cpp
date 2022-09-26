@@ -53,3 +53,21 @@ void AsyncNETSGPClient::update()
         }
     }
 }
+
+String AsyncNETSGPClient::getInvertersJSON(void) {
+    String tmpStr = "{\"inverter\":{\"count\":";
+    tmpStr+= String(mDevices.size());
+    if ( mDevices.size() > 0 ) {
+        tmpStr+= ",\"inverterID\":[";
+        for(auto id : mDevices) {
+            char devID[10];
+            sprintf(devID, "%08lX", id);
+            tmpStr+= "\"" + String(devID) + "\",";
+        }
+        if (tmpStr.length () > 0) tmpStr.remove (tmpStr.length()-1, 1);
+        tmpStr+= "]";
+    }
+    
+    tmpStr+= "}}";
+    return tmpStr;
+}
