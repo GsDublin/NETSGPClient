@@ -3,7 +3,7 @@ Arduino Interface for cheap 2.4ghz RF enabled Solar Micro Inverters using the so
 
 # Hardware
 ESP32
-LC12S
+LC12S SerialBridge
 
 ## Examples
 The `PollDemo` shows how to request a status from the Micro Inverter synchronously.
