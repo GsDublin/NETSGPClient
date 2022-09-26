@@ -33,13 +33,20 @@ public:
     /// @param deviceID The device identifier of the inverter
     void deregisterInverter(const uint32_t deviceID) { mDevices.erase(deviceID); }
 
+    uint16_t getInverterAmount(void) { return mDevices.size(); }
+    
+    void clearInverters(void) { mDevices.clear(); }
+    
+    String getInvertersJSON(void);
+    
     /// @brief Update the internal state
     ///
     /// @note Needs to be called inside loop()
     void update();
 
-private:
     uint16_t mIntervalMS; /// Update interval in milliseconds
+    
+private:
     uint32_t mLastUpdateMS; /// Last update time in milliseconds
     uint32_t mLastSendMS; /// Makes sure we do not send to often
     bool mCanSend = true; /// Can the next message be sent?
